@@ -83,7 +83,7 @@ void send24h()
     int currentCount = lastCount + 1;
     int parentNode = currentCount - 1;
 
-    std::string parentPath = databasePath + "/" + dateStr;
+    std::string parentPath = databasePath + "/" + std::to_string(parentNode);
 
     Serial.print("Current counter value: ");
     Serial.println(parentNode);
@@ -96,8 +96,9 @@ void send24h()
     {
       json.set(statusPath.c_str(), "AVAILABLE");
     }
-    json.set(weightPath.c_str(), String(weight));
-    json.set(percentPath.c_str(), String(percentage));
+    json.set(weightPath, weight);
+    json.set(percentPath, percentage);
+
     json.set(datePath, String(dateStr));
     json.set(timePath, String(timeStr));
 
